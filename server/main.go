@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"net/http"
 	"strings"
 
 	"github.com/gocraft/web"
@@ -22,11 +23,11 @@ func (c *Context) SayHello(rw web.ResponseWriter, req *web.Request) {
 
 func main() {
 
-	// router := web.New(Context{}). // Create your router
-	// 				Middleware(web.LoggerMiddleware).    // Use some included middleware
-	// 				Middleware(web.ShowErrorsMiddleware) // ...
+	router := web.New(Context{}). // Create your router
+					Middleware(web.LoggerMiddleware).    // Use some included middleware
+					Middleware(web.ShowErrorsMiddleware) // ...
 
-	// router.Get("/", (*Context).SayHello)
-	// router.Get("/", (*Context).SayHello)
-	// http.ListenAndServe("localhost:3000", router) // Start the server!
+	router.Get("/", (*Context).SayHello)
+	router.Get("/", (*Context).SayHello)
+	http.ListenAndServe("localhost:3000", router) // Start the server!
 }
